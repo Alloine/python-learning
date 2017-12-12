@@ -3,31 +3,42 @@
 
 import random 
 
-def mixwords(bonjour):
+def delete_word_index(oldstr, index):
+	
+	if index > 0:
+		return oldstr[:index] + oldstr[index+1:]
+	else:
+		return oldstr[1:]
+		pass
+
+	pass
+
+def mixwords(mot_saisi_a_melanger):
 
 	# Définition de la varaible du mot que l'on devra retourné mixé
-	mix_word = ""²
+	mix_word = ""
 
 	# On boucle sur toute les lettres du mot sauf une
 	# sinon le random.randrange(0, 0) retourne une erreur
-	while len(bonjour) > 1:
+	while len(mot_saisi_a_melanger) > 1:
 		
-		#On recupère un index aléatoire du mot saisie par l'utilisateur
+		#On recupère un chiffres aléatoire du mot saisie par l'utilisateur
+		# Compris entre 0 et le maximum de lettre dans le mot  ( salut = 5 index soit de 0 à 4 )
 		# -1 puisque dans un tableau les index commence à 0
-		index_aleatoire = random.randrange(0, len(bonjour)-1)
+		index_maximum_du_mot = len(mot_saisi_a_melanger)-1
+		index_aleatoire = random.randrange(0, index_maximum_du_mot)
 
-		# On ajoute à notre mot que l'on doit retourner les lettre aléatoire
-		mix_word = mix_word + bonjour[index_aleatoire]
+		# On ajoute à notre mot que l'on doit retourner la lettre aléatoire
+		mix_word = mix_word + mot_saisi_a_melanger[index_aleatoire]
 
 		# Petit trick pour retirer la lettre du mot
-		b = bytearray(bonjour)
-		del b[index_aleatoire]
-		bonjour = str(b)
+		# supprimer du mot d'origine la lettre que l'on a recupéré
+		mot_saisi_a_melanger = delete_word_index(mot_saisi_a_melanger, index_aleatoire)
 
 		pass
 
 	#on ajouter à la fin la dernière letre restante du mot choisie
-	mix_word = mix_word + bonjour
+	mix_word = mix_word + mot_saisi_a_melanger
 
 	# Enfin on retourn le texte mixé
 	return mix_word
@@ -35,13 +46,20 @@ def mixwords(bonjour):
 
 	pass
 
+
 print('\n\n------------------------------------------')
 print('-------------- SUPER GAME ----------------')
 print('------------------------------------------\n')
-text = raw_input('Put a text here : \n')
 
 
-print ("\nVotre texte mixed est: \n"  + mixwords(text))
+# Vairable contenant le mot saisie par l'utilisateur
+text = input('Put a text here : \n')
+
+
+mot_mixe = mixwords(text)
+
+# On affiche à l'utilisateur le mot mixé
+print ("\nVotre texte mixed est: \n"  + mot_mixe)
 
 print('\n------------   CREDITS: US ----------------')
 
